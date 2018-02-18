@@ -1,0 +1,63 @@
+.noResultsWrapper {
+    width: 100%;
+    height: 25px;
+
+    margin-top: 16px;
+
+    text-align: center;
+}
+
+.resultWrapper {
+    width: 100%;
+    height: calc(100% - 136px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultList {
+    width: 750px;
+    height: calc(100% - 32px);
+
+    list-style-type: none;
+
+    padding: 0;
+    margin: 16px 0;
+
+    border: 1px solid black;
+
+    overflow-y: scroll;
+}
+
+.TransactionBlock {
+    width: calc(100% - 32px);
+    height: 50px;
+
+    margin: 8px 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+    border: 1px solid black;
+}
+
+.TransactionAmount {
+    width: 46px;
+
+    margin-left: 4px;
+}
+
+.TransactionDescription {
+    width: 225px;
+}
+
+.TransactionNote {
+    width: 350px;
+}
+
+.TransactionEmotion {
+    width: 75px;
+}
