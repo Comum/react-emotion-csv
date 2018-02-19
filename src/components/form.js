@@ -9,7 +9,9 @@ class Form extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        this.props.onSubmitUserForm(this.refs.userName.value);
+        // console.log(this.refs.description.value);
+        // console.log(this.refs.emotion.value);
+        this.props.onSubmitEmotionsForm(this.refs.description.value, this.refs.emotion.value);
     }
 
     render() {
@@ -17,8 +19,20 @@ class Form extends React.Component {
             <div className="formWrapper">
                 <form action="" className="formContainer" onSubmit={this.handleSubmit}>
                     <div className="formField">
-                        <label htmlFor="userName" className="labelInlineField">Value: </label>
-                        <input type="text" name="userName" id="userName" ref="userName"/>
+                        <label htmlFor="description" className="labelInlineField">Description: </label>
+                        <input type="text" name="description" id="description" ref="description"/>
+                    </div>
+                    <div className="formField">
+                        <label htmlFor="emotion" className="labelInlineField">Emotion: </label>
+                        <select ref="emotion" name="emotion" id="emotion">
+                            <option value="0">--emotion--</option>
+                            <option value="love">Love</option>
+                            <option value="hate">Hate</option>
+                            <option value="confusion">Confusion</option>
+                            <option value="sadness">Sadness</option>
+                            <option value="surprise">Surprise</option>
+                            <option value="joy">Joy</option>
+                        </select>
                     </div>
                     <div className="formField">
                         <input type="submit" value="Search"/>

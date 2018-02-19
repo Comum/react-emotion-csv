@@ -22,12 +22,42 @@ function getEmotionsListFromCsv() {
 
 const requestedEmotionsResults = createAction(emotionsActions.EMOTIONS_RESULTS_REQUESTED);
 const receivedEmotionsResults = createAction(emotionsActions.EMOTIONS_RESULTS_RECEIVED);
-export const getEmotionsResults = () => {
+export const getEmotionsResults = (description, emotion) => {
     return dispatch => {
         dispatch(requestedEmotionsResults());
-        return fetch(`https://api.github.com/users/Comum`)
-            .then(response => response.json())
-            .then(json => dispatch(receivedEmotionsResults(json)))
+    
+        getEmotionsListFromCsv()
+            .then(value => {
+                return new Promise((resolve) => {
+                    if (description.length) {
+                        value = value.filter(transaction => {
+                            if (transaction.description.indexOf(description) >= 0) {
+                                return transaction;
+                            }
+                        });
+                    } else {
+                        resolve(value);
+                    }
+
+                    resolve(value);
+                });
+            })
+            .then(value => {
+                return new Promise((resolve) => {
+                    if (emotion !== '0') {
+                        value = value.filter(transaction => {
+                            if (transaction.emotion === emotion) {
+                                return transaction;
+                            }
+                        });
+                    } else {
+                        resolve(value);
+                    }
+
+                    resolve(value);
+                });
+            })
+            .then(value => dispatch(receivedEmotionsList(value)));
     }
 }
 

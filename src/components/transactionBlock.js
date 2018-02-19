@@ -7,8 +7,6 @@ class TransactionBlock extends React.Component {
     }
     
     render() {
-        console.log(this.props);
-
         return (
             <li className="TransactionBlock">
                 <div className="TransactionAmount">{this.props.transaction.amount}</div>
