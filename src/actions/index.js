@@ -1,7 +1,5 @@
-import * as d3 from 'd3';
-
 import emotionsActions from './emotionsActions';
-import { mockAddEmotion, mockRemoveEmotion } from '../server/mockServer';
+import { mockAddEmotion, mockRemoveEmotion, getFilteredEmotionsListFromCsv, getAllTransactions } from '../server/mockServer';
 
 function createAction(actionType) {
     return data => {
@@ -26,34 +24,8 @@ const receivedEmotionsResults = createAction(emotionsActions.EMOTIONS_RESULTS_RE
 export const getEmotionsResults = (description, emotion) => {
     return dispatch => {
         dispatch(requestedEmotionsResults());
-    
-        getEmotionsListFromCsv()
-            .then(value => {
-                return new Promise(resolve => {
-                    if (description.length) {
-                        value = value.filter(transaction => {
-                            if (transaction.description.indexOf(description) >= 0) {
-                                return transaction;
-                            }
-                        });
-                    }
 
-                    resolve(value);
-                });
-            })
-            .then(value => {
-                return new Promise(resolve => {
-                    if (emotion !== '0') {
-                        value = value.filter(transaction => {
-                            if (transaction.emotion === emotion) {
-                                return transaction;
-                            }
-                        });
-                    }
-
-                    resolve(value);
-                });
-            })
+        getFilteredEmotionsListFromCsv(description, emotion)
             .then(value => dispatch(receivedEmotionsResults(value)));
     }
 }
@@ -64,7 +36,7 @@ export const getEmotionsList = () => {
     return dispatch => {
         dispatch(requestedEmotionsList());
 
-        getEmotionsListFromCsv()
+        getAllTransactions()
             .then(value => dispatch(receivedEmotionsList(value)));
     }
 }
