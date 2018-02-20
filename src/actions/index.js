@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 
 import emotionsActions from './emotionsActions';
+import { mockAddEmotion, mockRemoveEmotion } from '../server/mockServer';
 
 function createAction(actionType) {
     return data => {
@@ -71,13 +72,19 @@ export const getEmotionsList = () => {
 const addEmotion = createAction(emotionsActions.ADD_EMOTION);
 export const addEmotionToTransaction = (id, emotion) => {
     return dispatch => {
-        dispatch(addEmotion({id: id, emotion: emotion}));
+        mockAddEmotion(id, emotion)
+        .then(() => {
+            dispatch(addEmotion({id: id, emotion: emotion})); 
+        });
     }
 }
 
 const removeEmotion = createAction(emotionsActions.REMOVE_EMOTION);
 export const removeEmotionFromTransation = id => {
     return dispatch => {
-        dispatch(removeEmotion(id));
+        mockRemoveEmotion(id)
+        .then(() => {
+            dispatch(removeEmotion(id)); 
+        });
     }
 }
