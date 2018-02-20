@@ -28,36 +28,32 @@ export const getEmotionsResults = (description, emotion) => {
     
         getEmotionsListFromCsv()
             .then(value => {
-                return new Promise((resolve) => {
+                return new Promise(resolve => {
                     if (description.length) {
                         value = value.filter(transaction => {
                             if (transaction.description.indexOf(description) >= 0) {
                                 return transaction;
                             }
                         });
-                    } else {
-                        resolve(value);
                     }
 
                     resolve(value);
                 });
             })
             .then(value => {
-                return new Promise((resolve) => {
+                return new Promise(resolve => {
                     if (emotion !== '0') {
                         value = value.filter(transaction => {
                             if (transaction.emotion === emotion) {
                                 return transaction;
                             }
                         });
-                    } else {
-                        resolve(value);
                     }
 
                     resolve(value);
                 });
             })
-            .then(value => dispatch(receivedEmotionsList(value)));
+            .then(value => dispatch(receivedEmotionsResults(value)));
     }
 }
 
@@ -69,5 +65,12 @@ export const getEmotionsList = () => {
 
         getEmotionsListFromCsv()
             .then(value => dispatch(receivedEmotionsList(value)));
+    }
+}
+
+const addEmotion = createAction(emotionsActions.ADD_EMOTION);
+export const addEmotionToTransaction = (id, emotion) => {
+    return dispatch => {
+        dispatch(addEmotion({id: id, emotion: emotion}));
     }
 }

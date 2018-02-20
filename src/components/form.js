@@ -3,14 +3,13 @@ import React from 'react';
 class Form extends React.Component {
     constructor(props) {
         super(props);
+        
         this.props = props;
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
 
-        // console.log(this.refs.description.value);
-        // console.log(this.refs.emotion.value);
         this.props.onSubmitEmotionsForm(this.refs.description.value, this.refs.emotion.value);
     }
 

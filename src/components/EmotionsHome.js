@@ -7,6 +7,7 @@ import Result from './result.js';
 class GitHome extends React.Component {
     constructor(props) {
         super(props);
+        
         this.props = props;
     }
 

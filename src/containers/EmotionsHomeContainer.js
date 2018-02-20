@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getEmotionsResults } from '../actions';
+import { getEmotionsResults, addEmotionToTransaction } from '../actions';
 import EmotionsHome from '../components/EmotionsHome';
 
 const stateToProps = state => {
@@ -13,6 +13,9 @@ const dispatchToProps = dispatch => {
     return {
         onSubmitEmotionsForm: (...args) => {
             dispatch(getEmotionsResults(...args))
+        },
+        onEmotionChanged: (...args) => {
+            dispatch(addEmotionToTransaction(...args))
         }
     };
 }

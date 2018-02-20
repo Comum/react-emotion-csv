@@ -3,24 +3,22 @@ import React from 'react';
 class TransactionBlock extends React.Component {
     constructor(props) {
         super(props);
+
         this.props = props;
-        this.state = {showSelect: false};
     }
 
-    handleClick() {
-        console.log(this);
+    handleClick = () => {
+        console.log(this.props);
+    }
+
+    handleEmotionChange = () => {
+        this.props.onEmotionChanged(this.props.transaction.id, this.refs.emotion.value);
     }
     
     render() {
-
-        // criar 3 returns em que mostra os 3 estados diferentes
-        //  - mostra select
-        //  - apaga emotion
-        //  - adiciona emotion
-        // criar 3 reducers para lidar com cada accao (no ponto anterior)
-
-        let transactionEmotionHandlerText = '+';
+        let transactionEmotionHandlerText = '';
         let transactionEmotionHandlerClass = ['TransactionEmotionHandler'];
+        let showSelect = false;
 
         if (this.props.transaction.emotion.length) {
             transactionEmotionHandlerText = 'x';
@@ -29,12 +27,31 @@ class TransactionBlock extends React.Component {
             transactionEmotionHandlerClass.push('text-green js-remove-emotion');
         }
 
+        if (!this.props.transaction.emotion.length) {
+            showSelect = true;
+        }
+
         return (
             <li className="TransactionBlock">
                 <div className="TransactionAmount">{this.props.transaction.amount}</div>
                 <div className="TransactionDescription">{this.props.transaction.description}</div>
                 <div className="TransactionNote">{this.props.transaction.note}</div>
-                <div className="TransactionEmotion">{this.props.transaction.emotion}</div>
+                
+                { showSelect ?
+                    <div className="TransactionEmotion">
+                        <select ref="emotion" name="emotion" id="emotion" onChange={this.handleEmotionChange}>
+                            <option value="0">--emotion--</option>
+                            <option value="love">Love</option>
+                            <option value="hate">Hate</option>
+                            <option value="confusion">Confusion</option>
+                            <option value="sadness">Sadness</option>
+                            <option value="surprise">Surprise</option>
+                            <option value="joy">Joy</option>
+                        </select>
+                    </div>
+                :
+                    <div className="TransactionEmotion">{this.props.transaction.emotion}</div>
+                }
                 <span className={transactionEmotionHandlerClass.join(' ')} onClick={this.handleClick}>{transactionEmotionHandlerText}</span>
             </li>
         );

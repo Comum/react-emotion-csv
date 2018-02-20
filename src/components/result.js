@@ -5,6 +5,7 @@ import TransactionBlock from './transactionBlock.js';
 class Result extends React.Component {
     constructor(props) {
         super(props);
+        
         this.props = props;
     }
 
