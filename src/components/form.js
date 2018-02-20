@@ -7,7 +7,7 @@ class Form extends React.Component {
         this.props = props;
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
 
         this.props.onSubmitEmotionsForm(this.refs.description.value, this.refs.emotion.value);
