@@ -13,7 +13,7 @@ function createAction(actionType) {
 }
 
 function getEmotionsListFromCsv() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         d3.csv('../data/transactions.csv', function(data) {
             resolve(data);
         });
@@ -72,5 +72,12 @@ const addEmotion = createAction(emotionsActions.ADD_EMOTION);
 export const addEmotionToTransaction = (id, emotion) => {
     return dispatch => {
         dispatch(addEmotion({id: id, emotion: emotion}));
+    }
+}
+
+const removeEmotion = createAction(emotionsActions.REMOVE_EMOTION);
+export const removeEmotionFromTransation = id => {
+    return dispatch => {
+        dispatch(removeEmotion(id));
     }
 }

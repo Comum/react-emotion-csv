@@ -34,7 +34,7 @@ class Form extends React.Component {
                         </select>
                     </div>
                     <div className="formField">
-                        <input type="submit" value="Search"/>
+                        <input type="submit" value="Search" className="formSubmitButton"/>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getEmotionsResults, addEmotionToTransaction } from '../actions';
+import { getEmotionsResults, addEmotionToTransaction, removeEmotionFromTransation } from '../actions';
 import EmotionsHome from '../components/EmotionsHome';
 
 const stateToProps = state => {
@@ -16,7 +16,10 @@ const dispatchToProps = dispatch => {
         },
         onEmotionChanged: (...args) => {
             dispatch(addEmotionToTransaction(...args))
-        }
+        },
+        onRemoveEmotion: (...args) => {
+            dispatch(removeEmotionFromTransation(...args))
+        },
     };
 }
 

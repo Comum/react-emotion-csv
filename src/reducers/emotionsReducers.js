@@ -8,13 +8,19 @@ const initialState = {
 }
 
 function editEmotionsResults(id, emotion, transactions) {
-    transactions.forEach((transaction) => {
+    transactions.forEach(transaction => {
         if (transaction.id === id) {
             transaction.emotion = emotion;
-        } else {
-            if (transaction.emotion === '') {
-                transaction.emotion = '';
-            }
+        }
+    });
+
+    return transactions;
+}
+
+function removeEmotion(id, transactions) {
+    transactions.forEach(transaction => {
+        if (transaction.id === id) {
+            transaction.emotion = '';
         }
     });
 
@@ -52,12 +58,21 @@ function reduceEmotionsResultsReceived(state, data) {
 }
 
 function reduceAddEmotions(state, data) {
-    let editedEmotionsResults = editEmotionsResults(data.id, data.emotion, state.emotionsResults)
+    let editedEmotionsResults = editEmotionsResults(data.id, data.emotion, state.emotionsResults);
         
     return {
         ...state,
         emotionsResults: editedEmotionsResults
     };  
+}
+
+function reduceRemoveEmotions(state, data) {
+    let editedEmotionsResults = removeEmotion(data, state.emotionsResults);
+
+    return {
+        ...state,
+        emotionsResults: editedEmotionsResults
+    };
 }
 
 export default (state, action) => {
@@ -76,6 +91,8 @@ export default (state, action) => {
             return reduceEmotionsResultsReceived(state, action.data);
         case emotions.ADD_EMOTION:
             return reduceAddEmotions(state, action.data);
+        case emotions.REMOVE_EMOTION:
+            return reduceRemoveEmotions(state, action.data);
         default:
             return state;
     }

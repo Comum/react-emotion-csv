@@ -8,7 +8,7 @@ class TransactionBlock extends React.Component {
     }
 
     handleClick = () => {
-        console.log(this.props);
+        this.props.onRemoveEmotion(this.props.transaction.id);
     }
 
     handleEmotionChange = () => {
@@ -19,21 +19,26 @@ class TransactionBlock extends React.Component {
         let transactionEmotionHandlerText = '';
         let transactionEmotionHandlerClass = ['TransactionEmotionHandler'];
         let showSelect = false;
+        let transactionAmountClass = ['TransactionAmount', 'text-bold'];
 
         if (this.props.transaction.emotion.length) {
             transactionEmotionHandlerText = 'x';
             transactionEmotionHandlerClass.push('text-red js-remove-emotion');
-        } else {
-            transactionEmotionHandlerClass.push('text-green js-remove-emotion');
         }
 
         if (!this.props.transaction.emotion.length) {
             showSelect = true;
         }
 
+        if (this.props.transaction.amount >= 0) {
+            transactionAmountClass.push('text-green');
+        } else {
+            transactionAmountClass.push('text-red');
+        }
+
         return (
             <li className="TransactionBlock">
-                <div className="TransactionAmount">{this.props.transaction.amount}</div>
+                <div className={transactionAmountClass.join(' ')}>{this.props.transaction.amount}</div>
                 <div className="TransactionDescription">{this.props.transaction.description}</div>
                 <div className="TransactionNote">{this.props.transaction.note}</div>
                 

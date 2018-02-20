@@ -63,3 +63,8 @@ Disclaimer
 ----------
 
 We will not use any of this code for any of Plum's applications.
+
+How to run
+----------
+1) npm install
+2) npm start
